@@ -17,6 +17,8 @@ class Usuario{
     public function __construct(){
 
         $this -> conexion = new BaseDatos();
+		$this -> security = new Security();
+		$this -> usuario = new Usuario();
 
     }
 

@@ -69,6 +69,7 @@
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $data = json_decode(file_get_contents("php://input"));
                  var_dump($data);
+                 
     
                 $id = 'null';
                 $nombre = $data->nombre;
@@ -78,7 +79,7 @@
                 $tags = $data->tags;
                 $redes = $data->redes;
 
-                if($this->ponente->comprobarCorreo($correo)){
+                if(!empty($this->ponente->comprobarCorreo($correo))){
                     echo "El correo ya existe en la base de datos";
                 }else{
                     $this->ponente->crearPonente($id, $nombre, $apellidos, $correo, $imagen, $tags, $redes);
@@ -96,7 +97,7 @@
 
             }
             if($PonenteArr==[]){
-                $response = json_encode(ResponseHttp::statusMessage(400,'No hay ningun ponente con esa id'));
+                $response = json_encode(ResponseHttp::statusMessage(200,'Ponente borrado exitosamente'));
             }else{
                 $response = json_encode($PonenteArr);
             }
@@ -119,7 +120,7 @@
                 $redes = $data->redes;
                 
 
-                if($this->ponente->comprobarId($id)){
+                if(!empty($this->ponente->comprobarId($id))){
                     $this->ponente->actualizarPonente($id, $nombre, $apellidos, $correo, $imagen, $tags, $redes);
                     echo "Ponente actualizado en la base de datos";
                     
