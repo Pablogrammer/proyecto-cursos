@@ -15,7 +15,7 @@ class PonenteController{
 
     public function __construct(){
 
-        ResponseHttp::setHeaders();
+        
         $this -> pages = new Pages();
         $this -> api = new ApiponenteController();
     }
@@ -25,7 +25,7 @@ class PonenteController{
         $response = $this -> api -> getAll();
         $response = json_decode($response);
 
-        $this -> pages -> render('read',['response' => $response]);
+        $this -> pages -> render('index',['response' => $response]);
     }
 
     public function getPonente($id){
@@ -45,9 +45,8 @@ class PonenteController{
 
     public function borrar($id){
         $response = $this -> api -> borrar($id);
-        $response = json_decode($response);
         
-
+    
         $this -> pages -> render('ponentes/borrado',['response' => $response]);
     }
 

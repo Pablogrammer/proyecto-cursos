@@ -17,12 +17,12 @@ class ApiUsuarioController{
         $this -> pages = new Pages();
     }
 
-    public function register(){
+    public function register($datos){
         
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
-            $data = json_decode(file_get_contents("php://input"));
+            $data = json_decode($datos);
             // var_dump($data);
 
 
@@ -49,6 +49,8 @@ class ApiUsuarioController{
         //TODO Hacer también el login con los mismos pasos
 
     }
+
+    
 }
 
 ?>

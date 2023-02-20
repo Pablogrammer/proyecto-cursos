@@ -41,6 +41,8 @@ foreach($ponentes as $ponente){
     echo '<td>'. $ponente -> imagen.'</td>';
     echo '<td>'. $ponente -> tags.'</td>';
     echo '<td>'. $ponente -> redes.'</td>';
+    echo '<td><a href='. $_ENV['BASE_URL'].'ponente/borrar/'. $ponente ->id.' >Borrar</a></td>';
+    echo '<td> <a href="#">actualizar</a> </td>';
     
     echo "</tr>";
 }
@@ -48,6 +50,8 @@ foreach($ponentes as $ponente){
 echo '</table>';
 
 ?>
+
+
 </body>
 </html>
 

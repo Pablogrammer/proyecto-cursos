@@ -14,7 +14,7 @@
 
         public function __construct()
         {
-            ResponseHttp::setHeaders();
+            
             $this -> ponente = new Ponente("","","","","","");
             $this -> pages = new Pages();
         }
@@ -104,9 +104,9 @@
 
             }
             if($PonenteArr==[]){
-                $response = json_encode(ResponseHttp::statusMessage(200,'Ponente borrado exitosamente'));
+                $response = json_decode(ResponseHttp::statusMessage(200,'Ponente borrado exitosamente'));
             }else{
-                $response = json_encode($PonenteArr);
+                $response = json_decode(ResponseHttp::statusMessage(400,'Error al borrar ponente'));
             }
             return $response;
             

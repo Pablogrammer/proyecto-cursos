@@ -5,9 +5,9 @@
     use Models\Ponente;
     use Lib\ResponseHttp;
     use Lib\Router;
-    use Controllers\ApiponenteController;
     use Controllers\PonenteController;
     use Controllers\ApiUsuarioController;
+    use Controllers\UsuarioController;
 
 
     $dotenv = Dotenv::createImmutable(__DIR__);
@@ -22,7 +22,7 @@
         require '../views/auth.php';
     });
 
-    Router::add('GET','ponente',function(){
+    Router::add('GET','/',function(){
         (new PonenteController()) -> getAll();
     });
 
@@ -42,8 +42,12 @@
         (new PonenteController()) -> actualizar();
     });
 
+    Router::add('GET', 'usuario/register', function(){
+        (new UsuarioController()) -> register();
+    });
+
     Router::add('POST', 'usuario/register', function(){
-        (new ApiUsuarioController()) -> register();
+        (new UsuarioController()) -> register();
     });
 
     Router::dispatch();
