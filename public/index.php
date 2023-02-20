@@ -27,19 +27,19 @@
     });
 
     Router::add('GET','ponente/:id',function(int $ponenteid){
-         (new ApiponenteController()) -> getPonente($ponenteid);
+         (new PonenteController()) -> getPonente($ponenteid);
     });
 
     Router::add('POST','ponente/crear', function(){
-        (new ApiponenteController()) -> crear();
+        (new PonenteController()) -> crear();
     });
 
     Router::add('GET','ponente/borrar/:id', function($ponenteid){
-        (new ApiponenteController()) -> borrar($ponenteid);    
+        (new PonenteController()) -> borrar($ponenteid);    
     });
 
     Router::add('POST', 'ponente/actualizar', function(){
-        (new ApiPonenteController()) -> actualizar();
+        (new PonenteController()) -> actualizar();
     });
 
     Router::add('POST', 'usuario/register', function(){

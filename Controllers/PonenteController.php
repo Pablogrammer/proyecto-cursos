@@ -22,9 +22,39 @@ class PonenteController{
 
     public function getAll(){
 
-        $respuesta = $this -> api -> getAll();
-        $respuesta = json_decode($respuesta);
-        $this -> pages -> render('read',['response' => $respuesta]);
+        $response = $this -> api -> getAll();
+        $response = json_decode($response);
+
+        $this -> pages -> render('read',['response' => $response]);
+    }
+
+    public function getPonente($id){
+
+        $response = $this -> api -> getPonente($id);
+        $response = json_decode($response);
+
+        $this -> pages -> render('ponentes/obtenerPonente',['response' => $response]);
+    }
+
+    public function crear(){
+
+        $response = $this -> api -> crear();
+
+        $this -> pages -> render('ponentes/crearPonente',['response' => $response]);
+    }
+
+    public function borrar($id){
+        $response = $this -> api -> borrar($id);
+        $response = json_decode($response);
+        
+
+        $this -> pages -> render('ponentes/borrado',['response' => $response]);
+    }
+
+    public function actualizar(){
+        $response = $this -> api -> actualizar();
+
+        $this -> pages -> render('ponentes/actualizado',['response' => $response]);
     }
 }
 

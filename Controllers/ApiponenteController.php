@@ -38,6 +38,7 @@
             }else{
                 $response = json_encode($PonenteArr);
             }
+
             return $response;
             
         }
@@ -60,17 +61,17 @@
             }else{
                 $response = json_encode($PonenteArr);
             }
-            $this -> pages -> render('read',['response' => $response]);
+            return $response;
         }
 
         //Crea un ponente a partir de un json que le pasemos con los datos de el mismo
         public function crear(){
+            $PonenteArr = [];
+
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $data = json_decode(file_get_contents("php://input"));
-                 var_dump($data);
-                 
-    
+
                 $id = 'null';
                 $nombre = $data->nombre;
                 $apellidos = $data->apellidos;
@@ -79,13 +80,19 @@
                 $tags = $data->tags;
                 $redes = $data->redes;
 
-                if(!empty($this->ponente->comprobarCorreo($correo))){
-                    echo "El correo ya existe en la base de datos";
+                if(!empty($this -> ponente -> comprobarCorreo($correo))){
+                    $response = json_decode(ResponseHttp::statusMessage(400, 'El correo ya existe en la base de datos'));
+                    
                 }else{
-                    $this->ponente->crearPonente($id, $nombre, $apellidos, $correo, $imagen, $tags, $redes);
-                    echo "Ponente insertado correctamente";
+                    $this -> ponente -> crearPonente($id, $nombre, $apellidos, $correo, $imagen, $tags, $redes);
+                    $response = json_decode(ResponseHttp::statusMessage(202,'Ponente creado correctamente'));  
+                    
                 }
+            }else{
+                $response = json_decode(ResponseHttp::statusMessage(400, 'El metodo empleado no es correcto prueba con POST'));
+                
             }
+            return $response;
         }
 
         //Borra un ponente con una id que le pasemos mediante GET
@@ -93,7 +100,7 @@
             $ponentes = $this -> ponente->findOne($id);
             $PonenteArr = [];
             if(!empty($ponentes)){
-                $this->ponente->borrarPonente($id);
+                $this -> ponente -> borrarPonente($id);
 
             }
             if($PonenteArr==[]){
@@ -101,7 +108,8 @@
             }else{
                 $response = json_encode($PonenteArr);
             }
-            $this -> pages -> render('read',['response' => $response]);
+            return $response;
+            
         }
 
         public function actualizar(){
@@ -109,7 +117,6 @@
 
 
                 $data = json_decode(file_get_contents("php://input"));
-                 var_dump($data);
     
                 $id = $data->id;
                 $nombre = $data->nombre;
@@ -122,15 +129,18 @@
 
                 if(!empty($this->ponente->comprobarId($id))){
                     $this->ponente->actualizarPonente($id, $nombre, $apellidos, $correo, $imagen, $tags, $redes);
-                    echo "Ponente actualizado en la base de datos";
-                    
+                    $response = json_decode(ResponseHttp::statusMessage(200,'Ponente actualizado exitosamente'));
 
                 }else{
-                    echo "La id del ponente no existe en la base de datos ";
+                    $response = json_decode(ResponseHttp::statusMessage(400,'El ponente no existe en la base de datos'));
+
                 }
-                
-                
+                }else{
+                    $response = json_decode(ResponseHttp::statusMessage(400,'El metodo no es correcto prueba con POST'));
+
                 }
+
+                return $response;
             }
 
         }
