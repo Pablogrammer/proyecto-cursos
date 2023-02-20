@@ -6,6 +6,7 @@
     use Lib\ResponseHttp;
     use Lib\Router;
     use Controllers\ApiponenteController;
+    use Controllers\PonenteController;
     use Controllers\ApiUsuarioController;
 
 
@@ -22,7 +23,7 @@
     });
 
     Router::add('GET','ponente',function(){
-        (new ApiponenteController()) -> getAll();
+        (new PonenteController()) -> getAll();
     });
 
     Router::add('GET','ponente/:id',function(int $ponenteid){
@@ -33,16 +34,16 @@
         (new ApiponenteController()) -> crear();
     });
 
-    Router::add('POST', 'usuario/register', function(){
-        (new ApiUsuarioController()) -> register();
-    });
-
     Router::add('GET','ponente/borrar/:id', function($ponenteid){
         (new ApiponenteController()) -> borrar($ponenteid);    
     });
 
     Router::add('POST', 'ponente/actualizar', function(){
         (new ApiPonenteController()) -> actualizar();
+    });
+
+    Router::add('POST', 'usuario/register', function(){
+        (new ApiUsuarioController()) -> register();
     });
 
     Router::dispatch();

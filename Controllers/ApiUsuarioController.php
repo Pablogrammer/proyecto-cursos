@@ -21,6 +21,7 @@ class ApiUsuarioController{
         
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
             $data = json_decode(file_get_contents("php://input"));
             // var_dump($data);
 
@@ -33,7 +34,9 @@ class ApiUsuarioController{
             var_dump($data);
 
             if(empty($this->usuario->comprobarCorreo($email))){
+                
                 $this->usuario->crear($nombre,$apellidos, $email, $passw);
+
 
             }else{
                 echo "este correo: $email ya existe en la base de datos";

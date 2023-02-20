@@ -21,7 +21,7 @@
 
 
         public function getAll(){
-            $ponentes = $this -> ponente->findAll();
+            $ponentes = $this -> ponente -> findAll();
             $PonenteArr = [];
             if(!empty($ponentes)){
                 $PonenteArr["message"] = json_decode(ResponseHttp::statusMessage(202,'OK'));
@@ -38,7 +38,7 @@
             }else{
                 $response = json_encode($PonenteArr);
             }
-            $this -> pages -> render('read',['response' => $response]);
+            return $response;
             
         }
 
