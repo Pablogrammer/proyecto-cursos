@@ -26,6 +26,7 @@ class ApiUsuarioController{
             // var_dump($data);
 
 
+
             $nombre = $data->nombre;
             $apellidos = $data->apellidos;
             $email = $data->email;

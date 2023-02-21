@@ -21,6 +21,7 @@ class UsuarioController{
     }
 
     public function register(){
+        
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $datos = json_encode($_POST['data']);
             $this -> api -> register($datos);

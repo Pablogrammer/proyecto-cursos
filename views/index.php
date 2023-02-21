@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ponentes</title>
 </head>
+<nav>
+    <a href="<?php $_ENV['BASE_URL']?>usuario/register/">Registrarse</a>    
+</nav>
 <body>
     <style>
         table{
@@ -42,7 +45,7 @@ foreach($ponentes as $ponente){
     echo '<td>'. $ponente -> tags.'</td>';
     echo '<td>'. $ponente -> redes.'</td>';
     echo '<td><a href='. $_ENV['BASE_URL'].'ponente/borrar/'. $ponente ->id.' >Borrar</a></td>';
-    echo '<td> <a href="#">actualizar</a> </td>';
+    echo '<td><a href='. $_ENV['BASE_URL'].'ponente/actualizar/>Actualizar</a></td>';
     
     echo "</tr>";
 }
