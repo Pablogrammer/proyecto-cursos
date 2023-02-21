@@ -15,7 +15,6 @@ class UsuarioController{
 
     public function __construct(){
 
-        ResponseHttp::setHeaders();
         $this -> pages = new Pages();
         $this -> api = new ApiUsuarioController();
     }
@@ -24,11 +23,15 @@ class UsuarioController{
         
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $datos = json_encode($_POST['data']);
-            $this -> api -> register($datos);
+            $response = $this -> api -> register($datos);
+            
+            $this -> pages -> render('usuario/register', ['response' => $response]);
+
         }
-        
+        else{
         $this -> pages -> render('usuario/register');
 
+        }
     }
 
     public function login(){

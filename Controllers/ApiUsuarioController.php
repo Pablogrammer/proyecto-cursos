@@ -4,17 +4,21 @@ namespace Controllers;
 
 use Lib\Pages;
 use Models\Usuario;
+use Lib\Security;
+use Lib\ResponseHttp;
 
 class ApiUsuarioController{
 
     private Usuario $usuario;
     private Pages $pages;
+    private Security $security;
 
 
 
     public function __construct(){
         $this -> usuario = new Usuario();
         $this -> pages = new Pages();
+        $this -> security = new Security();
     }
 
     public function register($datos){
@@ -23,29 +27,30 @@ class ApiUsuarioController{
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $data = json_decode($datos);
-            // var_dump($data);
-
-
 
             $nombre = $data->nombre;
             $apellidos = $data->apellidos;
             $email = $data->email;
             $passw = $data->passw;
+            $passw_s = $this -> security -> encriptaPassw($passw);
 
-            var_dump($data);
 
             if(empty($this->usuario->comprobarCorreo($email))){
-                
-                $this->usuario->crear($nombre,$apellidos, $email, $passw);
+
+                $response = json_decode(ResponseHttp::statusMessage(200, 'Usuario Creado Correctamente'));
+                $this->usuario->crear($nombre,$apellidos, $email, $passw_s);
 
 
             }else{
-                echo "este correo: $email ya existe en la base de datos";
-            }
+                $response = json_decode(ResponseHttp::statusMessage(400, 'El correo ya existe en la base de datos'));
 
-            echo "Nombre: " .$nombre. "<br> Email: " .$email. "<br> Contraseña: " .$passw; //TODO Ahora comprobar que no existe en la base de datos y en ese caso meterlo
+            }
+        }else{
+            $response = json_decode(ResponseHttp::statusMessage(404, 'El Metodo no es correcto prueba con POST'));
 
         }
+        return $response;
+
 
         //TODO Hacer también el login con los mismos pasos
 

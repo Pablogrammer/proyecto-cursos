@@ -12,13 +12,11 @@ class Usuario{
     private string $email;
     private BaseDatos $conexion;
 	private Security $security;
-	private Usuario $usuario;
 
     public function __construct(){
 
         $this -> conexion = new BaseDatos();
 		$this -> security = new Security();
-		$this -> usuario = new Usuario();
 
     }
 
@@ -100,10 +98,10 @@ class Usuario{
 		}
 	}
 	
-	public function crear($nombre, $apellidos, $email, $passw){  //TODO comprobar que no funciona
-		$passw_s = $this->security->encriptaPassw($passw);
-
-		$statement = "INSERT INTO usuarios (nombre, apellidos, email, password) VALUES ($nombre, $apellidos, $email, $passw_s)";
+	public function crear($nombre, $apellidos, $email, $passw){  
+		
+		
+		$statement = "INSERT INTO usuarios (nombre, apellidos, email, password, rol, confirmado) VALUES ('$nombre', '$apellidos', '$email', '$passw', 'user', 0)";
 
 		try{
 			$statement = $this -> conexion -> consulta($statement);    
