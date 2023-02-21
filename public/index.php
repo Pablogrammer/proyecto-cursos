@@ -30,8 +30,12 @@
          (new PonenteController()) -> getPonente($ponenteid);
     });
 
-    Router::add('POST','ponente/crear', function(){
-        (new PonenteController()) -> crear();
+    Router::add('GET','ponente/crear', function($datos){
+        (new PonenteController()) -> crear($datos);
+    });
+
+    Router::add('POST','ponente/crear', function($datos){
+        (new PonenteController()) -> crear($datos);
     });
 
     Router::add('GET','ponente/borrar/:id', function($ponenteid){

@@ -8,6 +8,20 @@
 </head>
 <body>
     <h1>Crear</h1>
-    <h1><?php echo $response -> message; ?></h1>
+    <h1><?php if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        echo $response->message;}
+        else{
+            echo 'Crear ponente ';
+        } ?></h1>
+        
+        <form action= "<?php $_ENV['BASE_URL']?>" method="post">
+        <label for="nombre">Nombre: </label><input type="text" name="data[nombre]" id="nombre"><br>
+        <label for="apellidos">Apellidos: </label><input type="text" name="data[apellidos]" id="apellidos"><br>
+        <label for="correo">Correo: </label><input type="correo" name="data[correo]" id="correo"><br>
+        <label for="imagen">Imagen: </label><input type="imagen" name="data[imagen]" id="imagen"><br>
+        <label for="tags">Tags: </label><input type="tags" name="data[tags]" id="tags"><br>
+        <label for="redes">Redes: </label><input type="redes" name="data[redes]" id="redes"><br>
+
+        <input type="submit" value="Enviar">
 </body>
 </html>

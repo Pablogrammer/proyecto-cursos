@@ -65,20 +65,18 @@
         }
 
         //Crea un ponente a partir de un json que le pasemos con los datos de el mismo
-        public function crear(){
-            $PonenteArr = [];
-
+        public function crear($datos){
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $data = json_decode(file_get_contents("php://input"));
+                
 
                 $id = 'null';
-                $nombre = $data->nombre;
-                $apellidos = $data->apellidos;
-                $correo = $data->correo;
-                $imagen = $data->imagen;
-                $tags = $data->tags;
-                $redes = $data->redes;
+                $nombre = $datos['nombre'];
+                $apellidos = $datos['apellidos'];
+                $correo = $datos['correo'];
+                $imagen = $datos['imagen'];
+                $tags = $datos['tags'];
+                $redes = $datos['redes'];
 
                 if(!empty($this -> ponente -> comprobarCorreo($correo))){
                     $response = json_decode(ResponseHttp::statusMessage(400, 'El correo ya existe en la base de datos'));
@@ -136,7 +134,7 @@
 
                 }
                 }else{
-                    $response = json_decode(ResponseHttp::statusMessage(400,'El metodo no es correcto prueba con POST'));
+                    $response = json_decode(ResponseHttp::statusMessage(404,'El metodo no es correcto prueba con POST'));
 
                 }
 

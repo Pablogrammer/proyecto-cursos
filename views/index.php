@@ -45,12 +45,14 @@ foreach($ponentes as $ponente){
     echo '<td>'. $ponente -> tags.'</td>';
     echo '<td>'. $ponente -> redes.'</td>';
     echo '<td><a href='. $_ENV['BASE_URL'].'ponente/borrar/'. $ponente ->id. ' >Borrar</a></td>';
-    echo '<td><a href='. $_ENV['BASE_URL'].'ponente/actualizar/'. $ponente->id .'>Actualizar</a></td>';
+    echo '<td><a href='. $_ENV['BASE_URL'].'ponente/actualizar/'. $ponente->id .'>Editar</a></td>';
     
     echo "</tr>";
 }
 
 echo '</table>';
+
+echo '<a href='. $_ENV['BASE_URL'].'ponente/crear>Crear</a>';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     echo $response->message;

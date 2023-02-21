@@ -36,11 +36,24 @@ class PonenteController{
         $this -> pages -> render('ponentes/obtenerPonente',['response' => $response]);
     }
 
-    public function crear(){
+    public function crear($datos){
 
-        $response = $this -> api -> crear();
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $datos = $_POST['data'];
+            
+            $response = $this -> api -> crear($datos);
+            
+            header("Refresh: 1; url=".$_ENV['BASE_URL']);
+            $this -> pages -> render('ponentes/obtenerPonente',['response' => $response]);
 
-        $this -> pages -> render('ponentes/crearPonente',['response' => $response]);
+        }
+        else{
+        $this -> pages -> render('ponentes/crearPonente');
+
+        }
+
+        
+
     }
 
     public function borrar($id){
@@ -52,8 +65,6 @@ class PonenteController{
     }
 
     public function actualizar($id){
-
-        
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $datos = $_POST['data'];
