@@ -72,6 +72,7 @@
 
         public function crear($datos){
 
+            //TODO Insertar validaciones
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 $id = 'null';

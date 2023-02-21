@@ -25,6 +25,7 @@ class ApiUsuarioController{
     public function register($datos){
         
 
+        //TODO Insertar validaciones
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $data = json_decode($datos);
@@ -53,7 +54,7 @@ class ApiUsuarioController{
         return $response;
 
 
-        //TODO Hacer también el login con los mismos pasos
+        //TODO Hacer el login 
 
     }
 
