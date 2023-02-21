@@ -19,6 +19,7 @@ class UsuarioController{
         $this -> api = new ApiUsuarioController();
     }
 
+    //Llama al método register de ApiUsuarioController y muestra la vista de registro
     public function register(){
         
         if($_SERVER['REQUEST_METHOD'] == 'POST'){

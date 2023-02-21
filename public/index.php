@@ -12,48 +12,49 @@
 
     $dotenv = Dotenv::createImmutable(__DIR__);
     $dotenv->safeLoad();
-
-    // http_response_code(202);
-    // $array = ["estado" => '202', "mensaje" => 'Estamos en el index public'];
-    // echo json_encode($array);
     
 
-    Router::add('GET','auth',function(){
-        require '../views/auth.php';
-    });
-
+    //Ruta de la vista principal. En mi caso la función getAll de ponente en la que muestra la lista de ponentes
     Router::add('GET','/',function(){
         (new PonenteController()) -> getAll();
     });
 
+    //Ruta para obtener ponente mediante una id con el método GET
     Router::add('GET','ponente/:id',function(int $ponenteid){
          (new PonenteController()) -> getPonente($ponenteid);
     });
 
+    //Ruta para crear un nuevo ponente mediante GET
     Router::add('GET','ponente/crear', function($datos){
         (new PonenteController()) -> crear($datos);
     });
 
+    //Ruta para crear un nuevo ponente mediante POST
     Router::add('POST','ponente/crear', function($datos){
         (new PonenteController()) -> crear($datos);
     });
 
+    //Ruta para borrar un ponente mediante GET
     Router::add('GET','ponente/borrar/:id', function($ponenteid){
         (new PonenteController()) -> borrar($ponenteid);    
     });
 
+    //Ruta para actualizar un ponente mediante POST
     Router::add('GET', 'ponente/actualizar/:id', function($id){
         (new PonenteController()) -> actualizar($id);
     });
 
+    //Ruta para actualizar un ponente mediante POST
     Router::add('POST', 'ponente/actualizar/:id', function($id){
         (new PonenteController()) -> actualizar($id);
     });
 
+    //Ruta para registrar a un usuario mediante GET 
     Router::add('GET', 'usuario/register', function(){
         (new UsuarioController()) -> register();
     });
 
+    //Ruta para registrar a un usuario mediante POST 
     Router::add('POST', 'usuario/register', function(){
         (new UsuarioController()) -> register();
     });

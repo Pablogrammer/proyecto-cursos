@@ -87,6 +87,7 @@ class Usuario{
 		return $this;
 	}
 
+	//Comprueba que el correo no existe ya en la base de datos
 	public function comprobarCorreo($email){
 		$statement = "SELECT email FROM usuarios WHERE email = '$email'";
 
@@ -98,8 +99,8 @@ class Usuario{
 		}
 	}
 	
+	//Crea un usuario en la base de datos con los datos que le pasamos
 	public function crear($nombre, $apellidos, $email, $passw){  
-		
 		
 		$statement = "INSERT INTO usuarios (nombre, apellidos, email, password, rol, confirmado) VALUES ('$nombre', '$apellidos', '$email', '$passw', 'user', 0)";
 

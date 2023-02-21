@@ -20,6 +20,8 @@
         }
 
 
+        //Obtiene todos los ponentes de la base de datos y los saca en un JSON
+        
         public function getAll(){
             $ponentes = $this -> ponente -> findAll();
             $PonenteArr = [];
@@ -43,6 +45,8 @@
             
         }
 
+        //Obtiene in ponente por su $id de la base de datos y los saca en JSON
+
         public function getPonente($id){
             $ponentes = $this -> ponente->findOne($id);
             $PonenteArr = [];
@@ -64,7 +68,8 @@
             return $response;
         }
 
-        //Crea un ponente a partir de un json que le pasemos con los datos de el mismo
+        //Crea un ponente a partir de un json que le pasemos con los datos en un array
+
         public function crear($datos){
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -93,7 +98,8 @@
             return $response;
         }
 
-        //Borra un ponente con una id que le pasemos mediante GET
+        //Borra un ponente con una id que le pasemos mediante
+
         public function borrar($id){
             $ponentes = $this -> ponente->findOne($id);
             $PonenteArr = [];
@@ -109,6 +115,10 @@
             return $response;
             
         }
+
+
+        //Actualiza un ponente recogiendo sus datos en un array. El ponente que vamos a actulizar lo reconocemos por su $id
+        //Que está incluida en el array de $datos
 
         public function actualizar($datos){
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -21,6 +21,7 @@ class ApiUsuarioController{
         $this -> security = new Security();
     }
 
+    //Registra a un usuario en la base de datos, los datos los pasamos en JSON y devuelve un mensaje de respuesta en JSON
     public function register($datos){
         
 
