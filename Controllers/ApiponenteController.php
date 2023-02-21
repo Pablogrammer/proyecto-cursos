@@ -68,29 +68,37 @@
             return $response;
         }
 
-        //Crea un ponente a partir de un json que le pasemos con los datos en un array
+        //Crea un ponente a partir de un json que le pasemos con los datos en un array 
+        //----------- VALIDADO --------------
 
         public function crear($datos){
 
-            //TODO Insertar validaciones
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                
-                $id = 'null';
-                $nombre = $datos['nombre'];
-                $apellidos = $datos['apellidos'];
-                $correo = $datos['correo'];
-                $imagen = $datos['imagen'];
-                $tags = $datos['tags'];
-                $redes = $datos['redes'];
 
-                if(!empty($this -> ponente -> comprobarCorreo($correo))){
-                    $response = json_decode(ResponseHttp::statusMessage(400, 'El correo ya existe en la base de datos'));
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if(gettype($this->ponente->validarDatos($datos)) == 'boolean'){
+
+                    $id = 'null';
+                    $nombre = $datos['nombre'];
+                    $apellidos = $datos['apellidos'];
+                    $correo = $datos['correo'];
+                    $imagen = $datos['imagen'];
+                    $tags = $datos['tags'];
+                    $redes = $datos['redes'];
+
+                    if(empty($this -> ponente -> comprobarCorreo($correo))){
                     
-                }else{
-                    $this -> ponente -> crearPonente($id, $nombre, $apellidos, $correo, $imagen, $tags, $redes);
-                    $response = json_decode(ResponseHttp::statusMessage(202,'Ponente creado correctamente'));  
+                        $this -> ponente -> crearPonente($id, $nombre, $apellidos, $correo, $imagen, $tags, $redes);
+                        $response = json_decode(ResponseHttp::statusMessage(202,'Ponente creado correctamente')); 
+                    }else{
+                        $response = json_decode(ResponseHttp::statusMessage(400, 'El correo ya existe en la base de datos'));
+
+                    }
+                    
+                }else{ 
+                    $response = $this->ponente->validarDatos($datos);
                     
                 }
+                
             }else{
                 $response = json_decode(ResponseHttp::statusMessage(400, 'El metodo empleado no es correcto prueba con POST'));
                 
@@ -119,10 +127,11 @@
 
         //Actualiza un ponente recogiendo sus datos en un array. El ponente que vamos a actulizar lo reconocemos por su $id
         //Que está incluida en el array de $datos
+        //----------- VALIDADO --------------
 
         public function actualizar($datos){
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+                if(gettype($this->ponente->validarDatos($datos)) == 'boolean'){
     
                 var_dump($datos);
                 
@@ -134,24 +143,20 @@
                 $tags = $datos['tags'];
                 $redes = $datos['redes'];
                 
-
-                if(!empty($this->ponente->comprobarId($id))){
                     $this->ponente->actualizarPonente($id, $nombre, $apellidos, $correo, $imagen, $tags, $redes);
                     $response = json_decode(ResponseHttp::statusMessage(200,'Ponente actualizado exitosamente'));
 
-                }else{
-                    $response = json_decode(ResponseHttp::statusMessage(400,'El ponente no existe en la base de datos'));
-
                 }
-                }else{
-                    $response = json_decode(ResponseHttp::statusMessage(404,'El metodo no es correcto prueba con POST'));
-
+                else{
+                    $response = $this->ponente->validarDatos($datos);
                 }
 
-                return $response;
             }
 
+            return $response;
         }
+
+}
             
         
         

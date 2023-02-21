@@ -16,7 +16,9 @@
     </form>
 
     <p><?php if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        echo $response->message;
+        if(isset($response) && gettype($response) == 'string'){
+            echo '<p style="color:red;">'.$response.'</p>';
+        }
      } ?></p>
 </body>
 </html>

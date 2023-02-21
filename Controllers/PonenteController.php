@@ -50,10 +50,9 @@ class PonenteController{
             
             
             $response = $this -> api -> crear($datos);
-            
-            header("Refresh: 1; url=".$_ENV['BASE_URL']);
-            $this -> pages -> render('ponentes/obtenerPonente',['response' => $response]);
+            $this -> pages -> render('ponentes/crearPonente',['validacion' => $response]);
 
+            
         }
         else{
         $this -> pages -> render('ponentes/crearPonente');
@@ -78,9 +77,8 @@ class PonenteController{
             $datos = $_POST['data'];
             
             $response = $this -> api -> actualizar($datos);
-            
-            header("Refresh: 1; url=".$_ENV['BASE_URL']);
-            $this -> pages -> render('ponentes/obtenerPonente',['response' => $response]);
+
+            $this -> pages -> render('ponentes/actualizado',['response' => $response]);
 
         }
         else{

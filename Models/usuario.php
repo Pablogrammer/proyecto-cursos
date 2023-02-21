@@ -112,6 +112,47 @@ class Usuario{
 		}
 	
 	}
+
+	public function validarDatos($datos_ponente):string|bool{
+
+		$nombreval = "/^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ\s]+$/";
+		$tagval = "/^[0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ\s]+$/";
+		$redesval = "/^[0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ\s:_\-.,]+$/";
+		$imgval = "/^.*\.(jpg|png|jpeg)$/";
+
+		if(empty($datos_ponente['nombre']) ||
+			preg_match($nombreval, $datos_ponente['nombre']) === 0){
+			$message = "El nombre solo puede contener letras y espacios";
+		}
+
+		else if(empty($datos_ponente['apellidos']) ||
+			preg_match($nombreval, $datos_ponente['apellidos']) === 0){
+			$message = "El apellido solo puede contener letras y espacios";
+		}
+
+		else if(empty($datos_ponente['imagen']) ||
+			preg_match($imgval, $datos_ponente['imagen']) === 0){
+			$message = "La imagen debe tener el siguiente formato: nombreimagen.jpg/png/jpeg";
+		}
+
+		else if(empty($datos_ponente['tags']) ||
+			preg_match($tagval, $datos_ponente['tags']) === 0){
+			$message = "Al menos un tag es requerido y los tags deben tener el siguiente formato: Tag1 Tag2";
+
+		}
+
+		else if(empty($datos_ponente['redes']) ||
+			preg_match($redesval, $datos_ponente['redes']) === 0){
+			$message = "Al menos una red es requerida. No se admiten simbolos. Formato: red_1 red_2";
+		}
+
+		if(isset($message)){
+			return $message;
+		}else{
+			return true;
+		}
+
+	}
 }
 
 ?>

@@ -7,13 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Crear</h1>
-    <h1><?php if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        echo $response->message;}
-        else{
-            echo 'Crear ponente ';
-        } ?></h1>
-        
+    <h1>Crear ponente</h1>
+    
+    
         <form action= "<?php $_ENV['BASE_URL']?>" method="post">
         <label for="nombre">Nombre: </label><input type="text" name="data[nombre]" id="nombre"><br>
         <label for="apellidos">Apellidos: </label><input type="text" name="data[apellidos]" id="apellidos"><br>
@@ -23,5 +19,11 @@
         <label for="redes">Redes: </label><input type="redes" name="data[redes]" id="redes"><br>
 
         <input type="submit" value="Enviar">
+
+        <?php if( isset($validacion) && gettype($validacion) == 'string'){
+            echo '<p style="color: red">'.$validacion.'</p>';
+        }?>
+
+        <br><a href="<?php $_ENV['BASE_URL']?>../">Volver</a>
 </body>
 </html>

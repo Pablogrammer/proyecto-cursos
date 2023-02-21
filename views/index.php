@@ -53,7 +53,7 @@ foreach($ponentes as $ponente){
 
 echo '</table>';
 
-echo '<a href='. $_ENV['BASE_URL'].'ponente/crear>Crear</a>';
+echo '<br><a href='. $_ENV['BASE_URL'].'ponente/crear>Crear</a>';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     echo $response->message;
