@@ -26,7 +26,7 @@ class ApiUsuarioController{
 
     public function register($datos){
         
-
+        //TODO No funciona esta validación
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if(gettype($this->usuario->validarDatos($datos)) == 'boolean'){
@@ -39,9 +39,9 @@ class ApiUsuarioController{
                 $passw = $data->passw;
                 $passw_s = $this -> security -> encriptaPassw($passw);
 
-                
+                echo 'entra';
                 if(empty($this->usuario->comprobarCorreo($email))){
-
+                    echo 'correo ya existe';
                     $response = json_decode(ResponseHttp::statusMessage(200, 'Usuario Creado Correctamente'));
                     $this->usuario->crear($nombre,$apellidos, $email, $passw_s);
     
