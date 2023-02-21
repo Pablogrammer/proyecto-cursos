@@ -112,19 +112,19 @@
             
         }
 
-        public function actualizar(){
+        public function actualizar($datos){
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-
-                $data = json_decode(file_get_contents("php://input"));
     
-                $id = $data->id;
-                $nombre = $data->nombre;
-                $apellidos = $data->apellidos;
-                $correo = $data->correo;
-                $imagen = $data->imagen;
-                $tags = $data->tags;
-                $redes = $data->redes;
+                var_dump($datos);
+                
+                $id = $datos['id'];
+                $nombre = $datos['nombre'];
+                $apellidos = $datos['apellidos'];
+                $correo = $datos['correo'];
+                $imagen = $datos['imagen'];
+                $tags = $datos['tags'];
+                $redes = $datos['redes'];
                 
 
                 if(!empty($this->ponente->comprobarId($id))){

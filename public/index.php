@@ -38,8 +38,12 @@
         (new PonenteController()) -> borrar($ponenteid);    
     });
 
-    Router::add('POST', 'ponente/actualizar', function(){
-        (new PonenteController()) -> actualizar();
+    Router::add('GET', 'ponente/actualizar/:id', function($id){
+        (new PonenteController()) -> actualizar($id);
+    });
+
+    Router::add('POST', 'ponente/actualizar/:id', function($id){
+        (new PonenteController()) -> actualizar($id);
     });
 
     Router::add('GET', 'usuario/register', function(){

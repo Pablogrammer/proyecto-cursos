@@ -46,14 +46,29 @@ class PonenteController{
     public function borrar($id){
         $response = $this -> api -> borrar($id);
         
-    
+
+        header("Refresh: 1; url=".$_ENV['BASE_URL']);
         $this -> pages -> render('ponentes/borrado',['response' => $response]);
     }
 
-    public function actualizar(){
-        $response = $this -> api -> actualizar();
+    public function actualizar($id){
 
-        $this -> pages -> render('ponentes/actualizado',['response' => $response]);
+        
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $datos = $_POST['data'];
+            
+            $response = $this -> api -> actualizar($datos);
+            
+            header("Refresh: 1; url=".$_ENV['BASE_URL']);
+            $this -> pages -> render('ponentes/obtenerPonente',['response' => $response]);
+
+        }
+        else{
+        $this -> pages -> render('ponentes/actualizado', ['id' => $id]);
+
+        }
+        
     }
 }
 

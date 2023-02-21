@@ -6,11 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    <?php 
-     echo "<h1>". $response -> message ."</h1>";
+<style>
+    body{
+        display: flex;
+        width: 100%;
+        height: 100%;
+    }
+    #texto{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
 
-    ?>
+</style>
+<body>
+    <div id="texto">
+        <?php 
+
+        echo "<h1>". $response -> message ."</h1>";
+
+        ?>
+    </div>
 </body>
 </html>
 

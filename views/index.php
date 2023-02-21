@@ -44,14 +44,17 @@ foreach($ponentes as $ponente){
     echo '<td>'. $ponente -> imagen.'</td>';
     echo '<td>'. $ponente -> tags.'</td>';
     echo '<td>'. $ponente -> redes.'</td>';
-    echo '<td><a href='. $_ENV['BASE_URL'].'ponente/borrar/'. $ponente ->id.' >Borrar</a></td>';
-    echo '<td><a href='. $_ENV['BASE_URL'].'ponente/actualizar/>Actualizar</a></td>';
+    echo '<td><a href='. $_ENV['BASE_URL'].'ponente/borrar/'. $ponente ->id. ' >Borrar</a></td>';
+    echo '<td><a href='. $_ENV['BASE_URL'].'ponente/actualizar/'. $ponente->id .'>Actualizar</a></td>';
     
     echo "</tr>";
 }
 
 echo '</table>';
 
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    echo $response->message;
+} 
 ?>
 
 
