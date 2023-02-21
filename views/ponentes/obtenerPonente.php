@@ -8,6 +8,8 @@
 </head>
 <body>
     <h1>Obtener</h1>
-    <h1><?php echo $response->message; ?></h1>
+    <h1><?php if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        echo $response->message;
+        } ?></h1>
 </body>
 </html>

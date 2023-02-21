@@ -48,6 +48,7 @@ class PonenteController{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $datos = $_POST['data'];
             
+            
             $response = $this -> api -> crear($datos);
             
             header("Refresh: 1; url=".$_ENV['BASE_URL']);

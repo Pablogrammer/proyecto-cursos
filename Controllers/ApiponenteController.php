@@ -21,7 +21,7 @@
 
 
         //Obtiene todos los ponentes de la base de datos y los saca en un JSON
-        
+
         public function getAll(){
             $ponentes = $this -> ponente -> findAll();
             $PonenteArr = [];
@@ -74,7 +74,6 @@
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
-
                 $id = 'null';
                 $nombre = $datos['nombre'];
                 $apellidos = $datos['apellidos'];
