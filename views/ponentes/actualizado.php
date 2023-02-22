@@ -4,10 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../src/styles/style-form.css">
     <title>Document</title>
 </head>
 <body>
     <h1>Editar Ponente</h1>
+
+    <?php 
+    
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if(isset($response) && gettype($response) == 'string'){
+            echo '<p class="validacion">'.$response.'</p>';
+        }
+    }
+        ?>
 
     <?php 
     session_start();
@@ -26,15 +36,8 @@
         <input type="submit" value="Enviar">
     </form>
 
-    <?php 
-    
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        if(isset($response) && gettype($response) == 'string'){
-            echo '<p style="color:red;">'.$response.'</p>';
-        }
-    }
-        ?>
 
-<br><a href="<?php $_ENV['BASE_URL']?>../../">Volver</a>
+
+<br><a href="<?php $_ENV['BASE_URL']?>../../">&#9194;Volver</a>
 </body>
 </html>

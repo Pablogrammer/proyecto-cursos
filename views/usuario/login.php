@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../src/styles/style-form.css">
     <title>Document</title>
 </head>
 <body>
@@ -23,6 +24,14 @@
 
 
 <br><a href="<?php $_ENV['BASE_URL']?>../..">Volver</a>
+
+<?php 
+session_start();
+if(isset($_SESSION['usuario']) && $_SESSION['usuario'] != ''){
+    echo $_SESSION['usuario'];
+    header("Location:".$_ENV['BASE_URL']);
+}
+?>
 
 </body>
 </html>

@@ -47,8 +47,6 @@ class ApiUsuarioController{
                 }
             }else{
                 $response = $this->usuario->validarDatosRegister($datos);
-                var_dump($response);
-                die();
             }   
             $response = json_decode(ResponseHttp::statusMessage(400, 'Metodo incorrecto prueba con POST'));
         }

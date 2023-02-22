@@ -5,37 +5,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/style-index.css">
+    <link rel="stylesheet" href="../src/styles/style-index.css">
     <title>Ponentes</title>
 </head>
-<nav>
+<nav class="navbar">
     <?php 
     session_start();
     if(isset($_SESSION['usuario']) && $_SESSION['usuario'] != ''):?>
-        <h1>Bienvenido <?php echo $_SESSION['usuario']?></h1>
         <a href="<?php $_ENV['BASE_URL']?>usuario/logout/">Cerrar Sesion</a>  
         <?php else:?>
             <a href="<?php $_ENV['BASE_URL']?>usuario/register/">Registrarse</a>  
             <a href="<?php $_ENV['BASE_URL']?>usuario/login/">Login</a>
         <?php endif;?>
-    
-
 </nav>
 <body>
-    <style>
-        
-table{
-    border: black 1px solid;
-}
+<?php if(isset($_SESSION['usuario']) && $_SESSION['usuario'] != ''):?>
+    <h1 class="bienvenido">Bienvenido <?php echo $_SESSION['usuario']?></h1>
+    <?php endif;?>
 
-th{
-    border: black 1px solid;
-}
 
-td{
-    border: black 1px solid;
-}
-    </style>
+    <div class="container">
+
     <h1>Lista Ponentes</h1>
 <?php 
 
@@ -56,8 +46,8 @@ foreach($ponentes as $ponente){
     echo '<td>'. $ponente -> tags.'</td>';
     echo '<td>'. $ponente -> redes.'</td>';
     if(isset($_SESSION['usuario']) && $_SESSION['usuario'] != ''){
-    echo '<td><a href='. $_ENV['BASE_URL'].'ponente/borrar/'. $ponente ->id. ' >Borrar</a></td>';
-    echo '<td><a href='. $_ENV['BASE_URL'].'ponente/actualizar/'. $ponente->id .'>Editar</a></td>';
+    echo '<td><a href='. $_ENV['BASE_URL'].'ponente/borrar/'. $ponente ->id. ' style="color:red" >&#9940; Borrar &#9940;</a></td>';
+    echo '<td><a href='. $_ENV['BASE_URL'].'ponente/actualizar/'. $ponente->id .' style="color:orange">&#9935;&#65039; Editar &#9935;&#65039;</a></td>';
     }
     
     echo "</tr>";
@@ -66,12 +56,13 @@ foreach($ponentes as $ponente){
 echo '</table>';
 
 if(isset($_SESSION['usuario']) && $_SESSION['usuario'] != ''){
-    echo '<br><a href='. $_ENV['BASE_URL'].'ponente/crear>Crear</a>';
+    echo '<br><a href='. $_ENV['BASE_URL'].'ponente/crear class="crear"> &#10133; Crear &#10133; </a>';
 }  
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     echo $response->message;
 } 
 ?>
+</div>
 
 </body>
 </html>
