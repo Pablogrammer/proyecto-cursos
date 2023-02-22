@@ -25,25 +25,27 @@ class ApiUsuarioController{
     //----------- VALIDADO --------------
 
     public function register($datos){
+
+        
         
         //TODO No funciona esta validación
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
 
             if(gettype($this->usuario->validarDatos($datos)) == 'boolean'){
 
-                $data = json_decode($datos);
-
-                $nombre = $data->nombre;
-                $apellidos = $data->apellidos;
-                $email = $data->email;
-                $passw = $data->passw;
+                $nombre = $datos['nombre'];
+                $apellidos = $datos['apellidos'];
+                $email = $datos['email'];
+                $passw = $datos['passw'];
                 $passw_s = $this -> security -> encriptaPassw($passw);
 
                 
                 if(empty($this->usuario->comprobarCorreo($email))){
-                    echo 'correo ya existe';
-                    $response = json_decode(ResponseHttp::statusMessage(200, 'Usuario Creado Correctamente'));
+                    
                     $this->usuario->crear($nombre,$apellidos, $email, $passw_s);
+                    $response = json_decode(ResponseHttp::statusMessage(200, 'Usuario Creado Correctamente'));
+
     
                 }else{
                     $response = json_decode(ResponseHttp::statusMessage(400, 'El correo ya existe en la base de datos'));
@@ -51,10 +53,14 @@ class ApiUsuarioController{
                 }
             }else{
                 $response = $this->usuario->validarDatos($datos);
+                var_dump($response);
+                die();
             }   
             $response = json_decode(ResponseHttp::statusMessage(400, 'Metodo incorrecto prueba con POST'));
         }
+        
         return $response;
+        
     }
 
 

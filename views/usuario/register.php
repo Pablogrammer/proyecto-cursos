@@ -7,6 +7,7 @@
     <title>Register</title>
 </head>
 <body>
+    <h1>Registro</h1>
     <form action= "<?php $_ENV['BASE_URL']?>" method="post">
         <label for="nombre">Nombre: </label><input type="text" name="data[nombre]" id="nombre"><br>
         <label for="apellidos">Apellidos: </label><input type="text" name="data[apellidos]" id="apellidos"><br>

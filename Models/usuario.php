@@ -113,37 +113,28 @@ class Usuario{
 	
 	}
 
-	public function validarDatos($datos_ponente):string|bool{
+	public function validarDatos($datos_usuario):string|bool{
 
 		$nombreval = "/^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ\s]+$/";
-		$tagval = "/^[0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ\s]+$/";
-		$redesval = "/^[0-9a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ\s:_\-.,]+$/";
-		$imgval = "/^.*\.(jpg|png|jpeg)$/";
+		$emailval = "/^[A-z0-9\\.-]+@[A-z0-9][A-z0-9-]*(\\.[A-z0-9-]+)*\\.([A-z]{2,6})$/";
+		$passwval = "/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,14}$/";
 
-		if(empty($datos_ponente['nombre']) ||
-			preg_match($nombreval, $datos_ponente['nombre']) === 0){
+		if(empty($datos_usuario['nombre']) ||
+			preg_match($nombreval, $datos_usuario['nombre']) === 0){
 			$message = "El nombre solo puede contener letras y espacios";
 		}
 
-		else if(empty($datos_ponente['apellidos']) ||
-			preg_match($nombreval, $datos_ponente['apellidos']) === 0){
+		else if(empty($datos_usuario['apellidos']) ||
+			preg_match($nombreval, $datos_usuario['apellidos']) === 0){
 			$message = "El apellido solo puede contener letras y espacios";
 		}
 
-		else if(empty($datos_ponente['imagen']) ||
-			preg_match($imgval, $datos_ponente['imagen']) === 0){
-			$message = "La imagen debe tener el siguiente formato: nombreimagen.jpg/png/jpeg";
+		else if(!preg_match($emailval, $datos_usuario['email'])){
+			return "Correo no valido";
 		}
 
-		else if(empty($datos_ponente['tags']) ||
-			preg_match($tagval, $datos_ponente['tags']) === 0){
-			$message = "Al menos un tag es requerido y los tags deben tener el siguiente formato: Tag1 Tag2";
-
-		}
-
-		else if(empty($datos_ponente['redes']) ||
-			preg_match($redesval, $datos_ponente['redes']) === 0){
-			$message = "Al menos una red es requerida. No se admiten simbolos. Formato: red_1 red_2";
+		else if(!preg_match($passwval,$datos_usuario['passw'])){
+			return "La contrasena debe medir entre 6 y 14 caracteres, al menos tener un numero, al menos una minuscula y al menos una mayuscula";
 		}
 
 		if(isset($message)){
