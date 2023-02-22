@@ -21,5 +21,8 @@
             echo '<p style="color:red;">'.$response.'</p>';
         }
      } ?></p>
+
+<br><a href="<?php $_ENV['BASE_URL']?>../../">Volver</a>
+
 </body>
 </html>

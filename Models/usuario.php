@@ -98,6 +98,19 @@ class Usuario{
 			exit($e -> getMessage());
 		}
 	}
+
+	public function obtenerPassword($email){
+
+		$statement = "SELECT password FROM usuarios WHERE email = '$email'";
+
+		try{
+			$statement = $this -> conexion -> consulta($statement);    
+			return $statement -> fetchAll(\PDO::FETCH_ASSOC);
+		}catch(\PDOException $e){
+			exit($e -> getMessage());
+		}
+		
+	}
 	
 	//Crea un usuario en la base de datos con los datos que le pasamos
 	public function crear($nombre, $apellidos, $email, $passw){  
@@ -113,7 +126,7 @@ class Usuario{
 	
 	}
 
-	public function validarDatos($datos_usuario):string|bool{
+	public function validarDatosRegister($datos_usuario):string|bool{
 
 		$nombreval = "/^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ\s]+$/";
 		$emailval = "/^[A-z0-9\\.-]+@[A-z0-9][A-z0-9-]*(\\.[A-z0-9-]+)*\\.([A-z]{2,6})$/";
@@ -130,11 +143,32 @@ class Usuario{
 		}
 
 		else if(!preg_match($emailval, $datos_usuario['email'])){
-			return "Correo no valido";
+			$message = "Correo no valido";
 		}
 
 		else if(!preg_match($passwval,$datos_usuario['passw'])){
-			return "La contrasena debe medir entre 6 y 14 caracteres, al menos tener un numero, al menos una minuscula y al menos una mayuscula";
+			$message = "La contrasena debe medir entre 6 y 14 caracteres, al menos tener un numero, al menos una minuscula y al menos una mayuscula";
+		}
+
+		if(isset($message)){
+			return $message;
+		}else{
+			return true;
+		}
+
+	}
+
+	public function validarDatosLogin($datos_usuario):string|bool{
+
+		$emailval = "/^[A-z0-9\\.-]+@[A-z0-9][A-z0-9-]*(\\.[A-z0-9-]+)*\\.([A-z]{2,6})$/";
+		$passwval = "/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,14}$/";
+
+		if(!preg_match($emailval, $datos_usuario['email'])){
+			$message = "Correo no valido";
+		}
+
+		else if(!preg_match($passwval,$datos_usuario['passw'])){
+			$message = "La contrasena debe medir entre 6 y 14 caracteres, al menos tener un numero, al menos una minuscula y al menos una mayuscula";
 		}
 
 		if(isset($message)){

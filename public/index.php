@@ -59,6 +59,22 @@
         (new UsuarioController()) -> register();
     });
 
+    //Ruta para logear a un usuario mediante GET 
+    Router::add('GET', 'usuario/login', function(){
+        (new UsuarioController()) -> login();
+    });
+
+    //Ruta para logear a un usuario mediante POST 
+    Router::add('POST', 'usuario/login', function(){
+        (new UsuarioController()) -> login();
+    });
+
+    //Ruta para cerrar sesion de un usuario mediante GET 
+    Router::add('GET', 'usuario/logout', function(){
+        (new UsuarioController()) -> logout();
+    });
+
+
     Router::dispatch();
 
 ?>

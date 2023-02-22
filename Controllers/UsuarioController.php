@@ -38,6 +38,25 @@ class UsuarioController{
 
     public function login(){
 
-        $this -> pages -> render('login');
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $datos = $_POST['data'];
+            
+            $response = $this -> api -> login($datos);
+            
+            $this -> pages -> render('usuario/login', ['response' => $response]);
+
+        }
+        else{
+        $this -> pages -> render('usuario/login');
+
+        }
+    }
+
+    public function logout(){
+        session_start();
+        if(isset($_SESSION['usuario']) && $_SESSION['usuario'] != '' ){
+            $_SESSION['usuario'] = '';
+            header("Refresh: 0.1; url=".$_ENV['BASE_URL']);
+        }
     }
 }

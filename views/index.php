@@ -9,7 +9,17 @@
     <title>Ponentes</title>
 </head>
 <nav>
-    <a href="<?php $_ENV['BASE_URL']?>usuario/register/">Registrarse</a>    
+    <?php 
+    session_start();
+    if(isset($_SESSION['usuario']) && $_SESSION['usuario'] != ''):?>
+        <h1>Bienvenido <?php echo $_SESSION['usuario']?></h1>
+        <a href="<?php $_ENV['BASE_URL']?>usuario/logout/">Cerrar Sesion</a>  
+        <?php else:?>
+            <a href="<?php $_ENV['BASE_URL']?>usuario/register/">Registrarse</a>  
+            <a href="<?php $_ENV['BASE_URL']?>usuario/login/">Login</a>
+        <?php endif;?>
+    
+
 </nav>
 <body>
     <style>
