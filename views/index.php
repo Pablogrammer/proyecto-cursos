@@ -29,11 +29,9 @@
     <h1>Lista Ponentes</h1>
 <?php 
 
-
+//Crea la vista en forma de tabla de todos los ponente que hay
 
 $ponentes = $response -> Ponentes;
-
-
 
 echo '<table><tr><th>Id</th><th>Nombre</th><th>Apellidos</th><th>Correo</th><th>Imagen</th><th>Tags</th><th>Redes</th></tr>';
 

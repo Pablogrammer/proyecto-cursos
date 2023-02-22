@@ -99,6 +99,7 @@ class Usuario{
 		}
 	}
 
+	//Obtiene la contraseña desde la base de datos de un usuario con el $email que le pasamos
 	public function obtenerPassword($email){
 
 		$statement = "SELECT password FROM usuarios WHERE email = '$email'";
@@ -126,6 +127,7 @@ class Usuario{
 	
 	}
 
+    //Valida todos los datos que debe de tener un usuario en el formulario de registro, devuelve true si está bien o un string con el mensaje de error
 	public function validarDatosRegister($datos_usuario):string|bool{
 
 		$nombreval = "/^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ\s]+$/";
@@ -158,6 +160,7 @@ class Usuario{
 
 	}
 
+    //Valida todos los datos que debe de tener un usuario en el formulario de login, devuelve true si está bien o un string con el mensaje de error
 	public function validarDatosLogin($datos_usuario):string|bool{
 
 		$emailval = "/^[A-z0-9\\.-]+@[A-z0-9][A-z0-9-]*(\\.[A-z0-9-]+)*\\.([A-z]{2,6})$/";
@@ -177,17 +180,6 @@ class Usuario{
 			return true;
 		}
 
-	}
-
-	public function sendMail($email, $nombre){
-		// ini_set( 'display_errors', 1 );
-		// error_reporting( E_ALL );
-		$from = 'propableras@gmail.com';
-		$to = $email;
-		$subject = 'Registro Usuario';
-		$message = 'Gracias, ' .$nombre. '. Usted ha sido registrado correctamente';
-		$header = 'From: '.$from;
-		mail($to, $subject, $message, $header);
 	}
 }
 

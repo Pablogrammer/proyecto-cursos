@@ -2,7 +2,6 @@
 
 namespace Controllers;
 
-use Lib\Pages;
 use Models\Usuario;
 use Lib\Security;
 use Lib\ResponseHttp;
@@ -19,6 +18,7 @@ class ApiUsuarioController{
 
     public function __construct(){
         $this -> usuario = new Usuario();
+        $this -> mailer = new Email();
         $this -> security = new Security();
     }
 
@@ -40,8 +40,7 @@ class ApiUsuarioController{
                 if(empty($this->usuario->comprobarCorreo($email))){
                     
                     $this->usuario->crear($nombre,$apellidos, $email, $passw_s);
-                    $this -> mailer = new Email($email);
-                    $this->mailer->sendMail();
+                    $this->mailer->sendMail($email);
                     $response = json_decode(ResponseHttp::statusMessage(200, 'Usuario Creado Correctamente'));
     
                 }else{
@@ -49,14 +48,21 @@ class ApiUsuarioController{
     
                 }
             }else{
-                $response = $this->usuario->validarDatosRegister($datos);
+                $response = json_decode(ResponseHttp::statusMessage(200, $this->usuario->validarDatosRegister($datos)));
             }   
-            $response = json_decode(ResponseHttp::statusMessage(400, 'Inserta todos los datos'));
+            
+            if($this->usuario->validarDatosRegister($datos) == 1){
+                $response = json_decode(ResponseHttp::statusMessage(200, 'Usuario creado correctamente'));
+            }else{
+                $response = json_decode(ResponseHttp::statusMessage(200, $this->usuario->validarDatosRegister($datos)));
+            }
+
         }
         
         return $response; 
     }
 
+    //Hace login de un usuario que debe de estar creado en la base de datos
     public function login($datos){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             if(gettype($this->usuario->validarDatosLogin($datos)) == 'boolean'){
@@ -68,7 +74,6 @@ class ApiUsuarioController{
                 if($this->usuario->comprobarCorreo($email)){
                     $passw_enc = $this->usuario->obtenerPassword($email);
 
-                    // $response = 'contraseña incorrecta';
                     if($this->security->validaPassw($passw,$passw_enc[0]['password'])){
 
                         session_start();

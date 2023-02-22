@@ -18,8 +18,9 @@
     </form>
 
     <p><?php if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        if(isset($response) && gettype($response) == 'string'){
-            echo '<p class="validacion">'.$response.'</p>';
+        
+        if(isset($response)){
+            echo '<p class="validacion">'.$response->message.'</p>';  
         }
      } ?></p>
 

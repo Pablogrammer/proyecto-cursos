@@ -26,7 +26,7 @@ class UsuarioController{
             $datos = $_POST['data'];
             
             $response = $this -> api -> register($datos);
-            var_dump($response);
+           
             
             $this -> pages -> render('usuario/register', ['response' => $response]);
 
@@ -37,6 +37,7 @@ class UsuarioController{
         }
     }
 
+    //Llama al método login de ApiUsuarioController o devuelve la vista de el formulario
     public function login(){
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -53,6 +54,7 @@ class UsuarioController{
         }
     }
 
+    //Cierra la sesión del usuario y le devuelve a la vista principal
     public function logout(){
         session_start();
         if(isset($_SESSION['usuario']) && $_SESSION['usuario'] != '' ){

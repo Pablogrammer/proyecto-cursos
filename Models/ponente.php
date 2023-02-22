@@ -149,6 +149,7 @@
                         return $this;
             }
 
+            //Saca en una consulta todos los datos de la tabla ponentes
             public function findAll(){
                 $statement = "SELECT * FROM ponentes;";
 
@@ -160,6 +161,7 @@
                 }
             }
 
+            //Saca en una consulta todos los datos de un ponente
             public function findOne($id){
                 $statement = "SELECT * FROM ponentes WHERE id=$id;";
 
@@ -185,7 +187,7 @@
 
             }
 
-            //Comprueba que en la base de datos no hay otro ponente con el mismo correo
+            //Comprueba que en la base de datos mediante el correo que no hay otro ponente con el mismo correo
             public function comprobarCorreo($correo){
                 $statement = "SELECT correo FROM ponentes WHERE correo LIKE '$correo'";
 
@@ -197,6 +199,7 @@
                 }
             }
 
+            //Saca todos los datos de un ponente mediante su id
             public function comprobarId($id){
                 
                 $statement = "SELECT * FROM ponentes WHERE id LIKE '$id'";
@@ -209,6 +212,7 @@
                 }
             }
 
+            //Borra un ponente mediante su id de la base de datos
             public function borrarPonente($id){
                 $statement = "DELETE FROM `ponentes` WHERE `ponentes`.`id` =  '$id'";
 
@@ -220,6 +224,7 @@
                 }
             }
 
+            //Actualiza todos los datos de un ponente en la base de datos
             public function actualizarPonente($id, $nombre, $apellidos, $correo, $imagen, $tags, $redes){
 
                 $statement = "UPDATE ponentes SET nombre = '$nombre', apellidos = '$apellidos', correo = '$correo', imagen = '$imagen', tags = '$tags', redes = '$redes' WHERE ponentes.id = '$id'";
@@ -232,6 +237,7 @@
 
             }
 
+            //Valida todos los datos que debe de tener un ponente, devuelve true si está bien o un string con el mensaje de error
             public function validarDatos($datos_ponente):string|bool{
 
                 $nombreval = "/^[a-zA-ZáéíóúàèìòùÀÈÌÒÙÁÉÍÓÚñÑüÜ\s]+$/";
