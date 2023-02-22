@@ -26,6 +26,7 @@ class UsuarioController{
             $datos = $_POST['data'];
             
             $response = $this -> api -> register($datos);
+            var_dump($response);
             
             $this -> pages -> render('usuario/register', ['response' => $response]);
 

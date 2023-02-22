@@ -6,22 +6,23 @@ use Lib\Pages;
 use Models\Usuario;
 use Lib\Security;
 use Lib\ResponseHttp;
+use Lib\Email;
+
 
 class ApiUsuarioController{
 
     private Usuario $usuario;
-    private Pages $pages;
     private Security $security;
+    private Email $mailer;
 
 
 
     public function __construct(){
         $this -> usuario = new Usuario();
-        $this -> pages = new Pages();
         $this -> security = new Security();
     }
 
-    //Registra a un usuario en la base de datos, los datos los pasamos en JSON y devuelve un mensaje de respuesta en JSON
+    //Registra a un usuario en la base de datos, envia un correo de registro. Los datos los pasamos en JSON y devuelve un mensaje de respuesta en JSON
     //----------- VALIDADO --------------
 
     public function register($datos){
@@ -39,6 +40,8 @@ class ApiUsuarioController{
                 if(empty($this->usuario->comprobarCorreo($email))){
                     
                     $this->usuario->crear($nombre,$apellidos, $email, $passw_s);
+                    $this -> mailer = new Email($email);
+                    $this->mailer->sendMail();
                     $response = json_decode(ResponseHttp::statusMessage(200, 'Usuario Creado Correctamente'));
     
                 }else{
@@ -48,7 +51,7 @@ class ApiUsuarioController{
             }else{
                 $response = $this->usuario->validarDatosRegister($datos);
             }   
-            $response = json_decode(ResponseHttp::statusMessage(400, 'Metodo incorrecto prueba con POST'));
+            $response = json_decode(ResponseHttp::statusMessage(400, 'Inserta todos los datos'));
         }
         
         return $response; 

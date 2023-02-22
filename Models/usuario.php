@@ -178,6 +178,17 @@ class Usuario{
 		}
 
 	}
+
+	public function sendMail($email, $nombre){
+		// ini_set( 'display_errors', 1 );
+		// error_reporting( E_ALL );
+		$from = 'propableras@gmail.com';
+		$to = $email;
+		$subject = 'Registro Usuario';
+		$message = 'Gracias, ' .$nombre. '. Usted ha sido registrado correctamente';
+		$header = 'From: '.$from;
+		mail($to, $subject, $message, $header);
+	}
 }
 
 ?>
