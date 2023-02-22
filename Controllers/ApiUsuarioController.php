@@ -39,7 +39,7 @@ class ApiUsuarioController{
                 $passw = $data->passw;
                 $passw_s = $this -> security -> encriptaPassw($passw);
 
-                echo 'entra';
+                
                 if(empty($this->usuario->comprobarCorreo($email))){
                     echo 'correo ya existe';
                     $response = json_decode(ResponseHttp::statusMessage(200, 'Usuario Creado Correctamente'));
@@ -51,16 +51,13 @@ class ApiUsuarioController{
                 }
             }else{
                 $response = $this->usuario->validarDatos($datos);
-    
-            }
-           
+            }   
+            $response = json_decode(ResponseHttp::statusMessage(400, 'Metodo incorrecto prueba con POST'));
         }
         return $response;
-
-
-        //TODO Hacer el login 
-
     }
+
+
 
     
 }
