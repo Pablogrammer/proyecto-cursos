@@ -132,8 +132,6 @@
         public function actualizar($datos){
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if(gettype($this->ponente->validarDatos($datos)) == 'boolean'){
-    
-                var_dump($datos);
                 
                 $id = $datos['id'];
                 $nombre = $datos['nombre'];
