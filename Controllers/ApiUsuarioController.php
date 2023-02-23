@@ -79,7 +79,8 @@ class ApiUsuarioController{
 
                         session_start();
                         $_SESSION['usuario'] = $email;
-                        $response = json_decode(ResponseHttp::statusMessage(200, 'Sesion iniciada correctamente'));
+                        $response = json_decode(ResponseHttp::statusMessage(200, 'Login correcto'));
+
                     }else{
                         $response = json_decode(ResponseHttp::statusMessage(400, 'El correo y contraseña no son correctos'));
 
