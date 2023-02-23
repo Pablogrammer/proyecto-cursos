@@ -33,11 +33,11 @@
 
 $ponentes = $response -> Ponentes;
 
-echo '<table><tr><th>Id</th><th>Nombre</th><th>Apellidos</th><th>Correo</th><th>Imagen</th><th>Tags</th><th>Redes</th></tr>';
+echo '<table><tr><th>Nombre</th><th>Apellidos</th><th>Correo</th><th>Imagen</th><th>Tags</th><th>Redes</th></tr>';
 
 foreach($ponentes as $ponente){
-    echo '<tr><td>'. $ponente -> id.'</td>';
-    echo '<td>'. $ponente -> nombre.'</td>';
+
+    echo '<tr><td>'. $ponente -> nombre.'</td>';
     echo '<td>'. $ponente -> apellidos.'</td>';
     echo '<td>'. $ponente -> correo.'</td>';
     echo '<td>'. $ponente -> imagen.'</td>';
