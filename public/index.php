@@ -26,7 +26,11 @@
 
     //Ruta para crear un nuevo ponente mediante GET
     Router::add('GET','ponente/crear', function($datos){
-        (new PonenteController()) -> crear($datos);
+        if(isset($_SESSION['usuario']) && $_SESSION['usuario'] != ''){
+            (new PonenteController()) -> crear($datos);
+        }else{
+            (new UsuarioController()) -> login();
+        }
     });
 
     //Ruta para crear un nuevo ponente mediante POST
@@ -36,12 +40,20 @@
 
     //Ruta para borrar un ponente mediante GET
     Router::add('GET','ponente/borrar/:id', function($ponenteid){
-        (new PonenteController()) -> borrar($ponenteid);    
+                if(isset($_SESSION['usuario']) && $_SESSION['usuario'] != ''){
+            (new PonenteController()) -> borrar($ponenteid);
+        }else{
+            (new UsuarioController()) -> login();
+        }   
     });
 
     //Ruta para actualizar un ponente mediante POST
     Router::add('GET', 'ponente/actualizar/:id', function($id){
-        (new PonenteController()) -> actualizar($id);
+        if(isset($_SESSION['usuario']) && $_SESSION['usuario'] != ''){
+            (new PonenteController()) -> actualizar($id);
+        }else{
+            (new UsuarioController()) -> login();
+        }
     });
 
     //Ruta para actualizar un ponente mediante POST
