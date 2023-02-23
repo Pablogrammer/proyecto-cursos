@@ -74,14 +74,16 @@ class ApiUsuarioController{
                 if($this->usuario->comprobarCorreo($email)){
                     $passw_enc = $this->usuario->obtenerPassword($email);
 
+
                     if($this->security->validaPassw($passw,$passw_enc[0]['password'])){
 
                         session_start();
                         $_SESSION['usuario'] = $email;
                         $response = json_decode(ResponseHttp::statusMessage(200, 'Sesion iniciada correctamente'));
+                    }else{
+                        $response = json_decode(ResponseHttp::statusMessage(400, 'El correo y contraseña no son correctos'));
 
                     }
-                    
 
                 }else{
                     $response = json_decode(ResponseHttp::statusMessage(400, 'El correo no existe en la base de datos'));
